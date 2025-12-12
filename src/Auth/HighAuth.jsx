@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-const Hoc = (Component) => {
+const HighAuth = (Component) => {
   return (props) => {
     const checkLogin = localStorage.getItem("isLogin");
     if (!checkLogin) {
@@ -11,4 +11,4 @@ const Hoc = (Component) => {
   };
 };
 
-export default Hoc;
+export default HighAuth;
