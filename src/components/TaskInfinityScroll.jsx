@@ -17,7 +17,8 @@ import {
   Button,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import HOC from "../Auth/HOC";
+import Hoc from "../Auth/HOC";
+// import HOC from "../Auth/HOC";
 
 const TaskInfinityScroll = () => {
   const [product, setProduct] = useState([]);
@@ -366,4 +367,4 @@ const TaskInfinityScroll = () => {
   );
 };
 
-export default HOC(TaskInfinityScroll);
+export default Hoc(TaskInfinityScroll);
