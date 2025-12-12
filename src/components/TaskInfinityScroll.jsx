@@ -17,7 +17,7 @@ import {
   Button,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import Hoc from "../Auth/HighAuth";
+import HighAuth from "../Auth/HighAuth";
 // import Hoc from "../Auth/Hoc";
 // import HOC from "../Auth/HOC";
 
