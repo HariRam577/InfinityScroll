@@ -1,4 +1,11 @@
-import { Box, Button, IconButton, Typography } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  Button,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import React, { useContext } from "react";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { authContext } from "../Auth/AuthContext";
@@ -10,25 +17,44 @@ const Header = () => {
     console.log("Logout");
     logout();
   };
+
   return (
-    <div>
-      {/* Header with Logout Button */}
-      <Box sx={{ mb: 6 }}>
-        {/* Logout Button - Top Right */}
-        <Box
-          sx={{
-            position: "absolute",
-            top: 20,
-            right: 20,
-            zIndex: 1300,
-            display: { xs: "none", md: "block" },
-          }}
-        >
+    <AppBar
+      position="fixed"
+      sx={{
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1300,
+        background: "rgba(2, 6, 23, 0.95)",
+        backdropFilter: "blur(20px)",
+        boxShadow: "0 8px 32px rgba(0,0,0,0.3)",
+        borderBottom: "1px solid rgba(148,163,184,0.1)",
+      }}
+    >
+      <Toolbar sx={{ justifyContent: "space-between", minHeight: 70, px: 3 }}>
+        {/* Logo/Title - Left */}
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Typography
+            variant="h5"
+            sx={{
+              fontWeight: 800,
+              color: "#e5e7eb",
+              letterSpacing: "-0.5px",
+              mr: 2,
+            }}
+          >
+            Premium Collection
+          </Typography>
+        </Box>
+
+        {/* Logout Button - Right */}
+        <Box sx={{ display: { xs: "none", md: "block" } }}>
           <Button
             variant="outlined"
             size="small"
             startIcon={<LogoutIcon />}
-            onClick={handleLogout} // Add your logout handler here
+            onClick={handleLogout}
             sx={{
               textTransform: "none",
               borderRadius: 2,
@@ -54,67 +80,22 @@ const Header = () => {
           </Button>
         </Box>
 
-        {/* Mobile Logout Button */}
-        <Box
+        {/* Mobile Logout */}
+        <IconButton
+          onClick={handleLogout}
           sx={{
+            color: "#e5e7eb",
             display: { xs: "block", md: "none" },
-            textAlign: "right",
-            mb: 2,
+            "&:hover": {
+              bgcolor: "rgba(79,70,229,0.2)",
+              transform: "scale(1.1)",
+            },
           }}
         >
-          <IconButton
-            onClick={handleLogout}
-            sx={{
-              color: "#e5e7eb",
-              "&:hover": {
-                bgcolor: "rgba(79,70,229,0.2)",
-                transform: "scale(1.1)",
-              },
-            }}
-          >
-            <LogoutIcon sx={{ fontSize: 24 }} />
-          </IconButton>
-        </Box>
-
-        {/* Header Title */}
-        <Box sx={{ textAlign: "center", position: "relative" }}>
-          <Typography
-            variant="h3"
-            component="h1"
-            sx={{
-              fontWeight: 800,
-              color: "#e5e7eb",
-              mb: 1,
-              letterSpacing: "-1px",
-            }}
-          >
-            Premium Collection
-          </Typography>
-          <Typography
-            variant="h6"
-            sx={{
-              fontWeight: 400,
-              maxWidth: 700,
-              mx: "auto",
-              mb: 2,
-              color: "rgb(148, 163, 184)",
-            }}
-          >
-            Explore our handpicked selection of quality products
-          </Typography>
-          <Box
-            sx={{
-              width: 80,
-              height: 4,
-              bgcolor: "#4f46e5",
-              mx: "auto",
-              borderRadius: 2,
-              boxShadow: "0 0 18px rgba(79,70,229,0.9)",
-            }}
-          />
-        </Box>
-      </Box>
-    </div>
+          <LogoutIcon sx={{ fontSize: 24 }} />
+        </IconButton>
+      </Toolbar>
+    </AppBar>
   );
 };
 

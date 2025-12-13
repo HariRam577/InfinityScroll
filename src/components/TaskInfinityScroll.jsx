@@ -94,239 +94,225 @@ const TaskInfinityScroll = () => {
     navigate(`/view/${id}`);
   };
   return (
-    <Box
-      sx={{
-        bgcolor:
-          "linear-gradient(135deg, #020617 0%, #020617 40%, #020617 100%)",
-        background:
-          "radial-gradient(circle at top, #0c131c  0, #020617 45%, #020617 100%)",
-        minHeight: "100vh",
-        py: 5,
-      }}
-    >
-      <Container maxWidth="xl">
-        {/* Loading Backdrop */}
-        {loading && <Loader loading={loading} />}
+    <Container maxWidth="xl">
+      {/* Loading Backdrop */}
+      {loading && <Loader loading={loading} />}
 
-        {/* Error Alert */}
-        {error && <Error error={error} />}
+      {/* Error Alert */}
+      {error && <Error error={error} />}
 
-        {/* Product Grid - MUI dark cards */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-            gap: "20px",
-          }}
-        >
-          {product.map((item) => (
-            <Grid item key={item.id} xs={12} sm={6} md={4} lg={3}>
-              <Card
-                sx={{
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  borderRadius: 3,
-                  bgcolor: "rgba(15,23,42,0.96)",
-                  border: "1px solid rgba(148,163,184,0.22)",
+      {/* Product Grid - MUI dark cards */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
+          gap: "20px",
+        }}
+      >
+        {product.map((item) => (
+          <Grid item key={item.id} xs={12} sm={6} md={4} lg={3}>
+            <Card
+              sx={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                borderRadius: 3,
+                bgcolor: "rgba(15,23,42,0.96)",
+                border: "1px solid rgba(148,163,184,0.22)",
+                boxShadow:
+                  "0 20px 40px rgba(15,23,42,0.85), 0 0 0 1px rgba(15,23,42,0.6)",
+                overflow: "hidden",
+                transition:
+                  "transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease",
+                "&:hover": {
+                  transform: "translateY(-6px)",
+                  borderColor: "rgba(129,140,248,0.85)",
                   boxShadow:
-                    "0 20px 40px rgba(15,23,42,0.85), 0 0 0 1px rgba(15,23,42,0.6)",
-                  overflow: "hidden",
-                  transition:
-                    "transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease",
-                  "&:hover": {
-                    transform: "translateY(-6px)",
-                    borderColor: "rgba(129,140,248,0.85)",
-                    boxShadow:
-                      "0 26px 60px rgba(79,70,229,0.6), 0 0 0 1px rgba(129,140,248,0.8)",
-                  },
-                }}
-              >
-                <Box sx={{ position: "relative" }}>
-                  <CardMedia
-                    component="img"
-                    height="190"
-                    image={item.thumbnail}
-                    alt={item.title}
-                    sx={{
-                      objectFit: "cover",
-                      filter: "saturate(1.1)",
-                      borderBottom: "1px solid rgba(31,41,55,0.9)",
-                    }}
-                  />
+                    "0 26px 60px rgba(79,70,229,0.6), 0 0 0 1px rgba(129,140,248,0.8)",
+                },
+              }}
+            >
+              <Box sx={{ position: "relative" }}>
+                <CardMedia
+                  component="img"
+                  height="190"
+                  image={item.thumbnail}
+                  alt={item.title}
+                  sx={{
+                    objectFit: "cover",
+                    filter: "saturate(1.1)",
+                    borderBottom: "1px solid rgba(31,41,55,0.9)",
+                  }}
+                />
+                <Chip
+                  label={item.category}
+                  size="small"
+                  sx={{
+                    position: "absolute",
+                    top: 12,
+                    left: 12,
+                    bgcolor: "rgba(15,23,42,0.92)",
+                    color: "#e5e7eb",
+                    border: "1px solid rgba(148,163,184,0.4)",
+                    textTransform: "capitalize",
+                    fontSize: 11,
+                  }}
+                />
+                {item.discountPercentage && (
                   <Chip
-                    label={item.category}
+                    label={`-${Math.round(item.discountPercentage)}%`}
                     size="small"
+                    color="error"
                     sx={{
                       position: "absolute",
                       top: 12,
-                      left: 12,
-                      bgcolor: "rgba(15,23,42,0.92)",
-                      color: "#e5e7eb",
-                      border: "1px solid rgba(148,163,184,0.4)",
-                      textTransform: "capitalize",
-                      fontSize: 11,
+                      right: 12,
+                      fontWeight: 600,
                     }}
                   />
-                  {item.discountPercentage && (
-                    <Chip
-                      label={`-${Math.round(item.discountPercentage)}%`}
-                      size="small"
-                      color="error"
+                )}
+              </Box>
+
+              <CardContent sx={{ flexGrow: 1, p: 2.2 }}>
+                <Typography
+                  gutterBottom
+                  variant="subtitle1"
+                  sx={{
+                    fontWeight: 600,
+                    fontSize: 16,
+                    color: "#e5e7eb",
+                    mb: 0.5,
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {item.title}
+                </Typography>
+
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "rgb(148,163,184)",
+                    mb: 1.5,
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                    minHeight: 40,
+                  }}
+                >
+                  {item.description}
+                </Typography>
+
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    mb: 1,
+                  }}
+                >
+                  <Box>
+                    <Typography
+                      variant="h6"
                       sx={{
-                        position: "absolute",
-                        top: 12,
-                        right: 12,
-                        fontWeight: 600,
+                        color: "#4ade80",
+                        fontWeight: 700,
+                        letterSpacing: "0.02em",
                       }}
-                    />
-                  )}
-                </Box>
-
-                <CardContent sx={{ flexGrow: 1, p: 2.2 }}>
-                  <Typography
-                    gutterBottom
-                    variant="subtitle1"
-                    sx={{
-                      fontWeight: 600,
-                      fontSize: 16,
-                      color: "#e5e7eb",
-                      mb: 0.5,
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {item.title}
-                  </Typography>
-
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      color: "rgb(148,163,184)",
-                      mb: 1.5,
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      display: "-webkit-box",
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: "vertical",
-                      minHeight: 40,
-                    }}
-                  >
-                    {item.description}
-                  </Typography>
-
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      mb: 1,
-                    }}
-                  >
-                    <Box>
-                      <Typography
-                        variant="h6"
-                        sx={{
-                          color: "#4ade80",
-                          fontWeight: 700,
-                          letterSpacing: "0.02em",
-                        }}
-                      >
-                        ${item.price}
-                      </Typography>
-                      {item.stock && (
-                        <Typography
-                          variant="caption"
-                          sx={{ color: "rgb(148,163,184)" }}
-                        >
-                          In stock: {item.stock}
-                        </Typography>
-                      )}
-                    </Box>
-                    <Box sx={{ textAlign: "right" }}>
-                      <Rating
-                        size="small"
-                        precision={0.1}
-                        value={item.rating}
-                        readOnly
-                      />
+                    >
+                      ${item.price}
+                    </Typography>
+                    {item.stock && (
                       <Typography
                         variant="caption"
-                        sx={{ color: "rgb(156,163,175)" }}
+                        sx={{ color: "rgb(148,163,184)" }}
                       >
-                        {item.rating.toFixed(1)} / 5
+                        In stock: {item.stock}
                       </Typography>
-                    </Box>
+                    )}
                   </Box>
-                </CardContent>
+                  <Box sx={{ textAlign: "right" }}>
+                    <Rating
+                      size="small"
+                      precision={0.1}
+                      value={item.rating}
+                      readOnly
+                    />
+                    <Typography
+                      variant="caption"
+                      sx={{ color: "rgb(156,163,175)" }}
+                    >
+                      {item.rating.toFixed(1)} / 5
+                    </Typography>
+                  </Box>
+                </Box>
+              </CardContent>
 
-                <CardActions
-                  sx={{ p: 2.2, pt: 0, justifyContent: "space-between" }}
-                >
-                  <Button
-                    variant="outlined"
-                    size="small"
-                    sx={{
-                      textTransform: "none",
-                      borderRadius: 999,
-                      color: "rgb(148,163,184)",
-                      borderColor: "rgba(148,163,184,0.5)",
-                      "&:hover": {
-                        borderColor: "rgba(129,140,248,0.9)",
-                        color: "#e5e7eb",
-                        background:
-                          "radial-gradient(circle at top, rgba(79,70,229,0.15), transparent 60%)",
-                      },
-                    }}
-                    onClick={() => handleView(item.id)}
-                  >
-                    View details
-                  </Button>
-                  <Button
-                    variant="contained"
-                    size="small"
-                    startIcon={<ShoppingCartIcon />}
-                    sx={{
-                      textTransform: "none",
-                      borderRadius: 999,
-                      fontWeight: 600,
+              <CardActions
+                sx={{ p: 2.2, pt: 0, justifyContent: "space-between" }}
+              >
+                <Button
+                  variant="outlined"
+                  size="small"
+                  sx={{
+                    textTransform: "none",
+                    borderRadius: 999,
+                    color: "rgb(148,163,184)",
+                    borderColor: "rgba(148,163,184,0.5)",
+                    "&:hover": {
+                      borderColor: "rgba(129,140,248,0.9)",
+                      color: "#e5e7eb",
                       background:
-                        "linear-gradient(135deg, #4f46e5 0%, #6366f1 40%, #8b5cf6 100%)",
+                        "radial-gradient(circle at top, rgba(79,70,229,0.15), transparent 60%)",
+                    },
+                  }}
+                  onClick={() => handleView(item.id)}
+                >
+                  View details
+                </Button>
+                <Button
+                  variant="contained"
+                  size="small"
+                  startIcon={<ShoppingCartIcon />}
+                  sx={{
+                    textTransform: "none",
+                    borderRadius: 999,
+                    fontWeight: 600,
+                    background:
+                      "linear-gradient(135deg, #4f46e5 0%, #6366f1 40%, #8b5cf6 100%)",
+                    boxShadow:
+                      "0 10px 25px rgba(79,70,229,0.6), 0 0 0 1px rgba(129,140,248,0.8)",
+                    "&:hover": {
+                      background:
+                        "linear-gradient(135deg, #4f46e5 0%, #4f46e5 40%, #7c3aed 100%)",
                       boxShadow:
-                        "0 10px 25px rgba(79,70,229,0.6), 0 0 0 1px rgba(129,140,248,0.8)",
-                      "&:hover": {
-                        background:
-                          "linear-gradient(135deg, #4f46e5 0%, #4f46e5 40%, #7c3aed 100%)",
-                        boxShadow:
-                          "0 14px 32px rgba(79,70,229,0.8), 0 0 0 1px rgba(129,140,248,1)",
-                      },
-                    }}
-                  >
-                    Add to cart
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-        </div>
+                        "0 14px 32px rgba(79,70,229,0.8), 0 0 0 1px rgba(129,140,248,1)",
+                    },
+                  }}
+                >
+                  Add to cart
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+        ))}
+      </div>
 
-        {/* Empty State */}
-        {!loading && product.length === 0 && !error && (
-          <Box sx={{ textAlign: "center", py: 10 }}>
-            <Typography variant="h5" sx={{ fontWeight: 500, color: "#e5e7eb" }}>
-              No products available
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{ mt: 1, color: "rgb(148,163,184)" }}
-            >
-              Please check back later
-            </Typography>
-          </Box>
-        )}
-      </Container>
-    </Box>
+      {/* Empty State */}
+      {!loading && product.length === 0 && !error && (
+        <Box sx={{ textAlign: "center", py: 10 }}>
+          <Typography variant="h5" sx={{ fontWeight: 500, color: "#e5e7eb" }}>
+            No products available
+          </Typography>
+          <Typography variant="body1" sx={{ mt: 1, color: "rgb(148,163,184)" }}>
+            Please check back later
+          </Typography>
+        </Box>
+      )}
+    </Container>
   );
 };
 // Hoc

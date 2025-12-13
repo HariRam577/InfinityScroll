@@ -23,7 +23,7 @@ const ProtectedLayout = ({ children, loading = false, error = "" }) => {
       {/* Main Content Container */}
       <Container
         maxWidth="xl"
-        sx={{ py: 5, mt: 12, position: "relative", zIndex: 2 }}
+        sx={{ py: 2, mt: 12, position: "relative", zIndex: 2 }}
       >
         {/* Loading Overlay */}
         {loading && (
